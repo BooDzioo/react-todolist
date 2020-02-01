@@ -8,10 +8,11 @@ const App = () => {
 
   let favorites = [];
 
-  const addItem = (val, prior) => {
+  const addItem = (val, prior, color) => {
     setItems([...items, {
       value: val,
-      priority: prior
+      priority: prior,
+      color: color
     }])
   }
 
@@ -32,14 +33,16 @@ const App = () => {
     if (item.priority === false) {
      
      return <TaskItem
-      key = {index} 
+      key = {index}
+      color = {item.color} 
       title={item.value}
       handleDeleteClick={() => deleteItem(index)}
       handlePriority={() => handlePriorityChange(index)}/>
     } else {
 
       favorites = [<TaskItem
-        key = {index} 
+        key = {index}
+        color = {item.color}  
         title={item.value}
         handleDeleteClick={() => deleteItem(index)}
         handlePriority={() => handlePriorityChange(index)}/>, ...favorites];

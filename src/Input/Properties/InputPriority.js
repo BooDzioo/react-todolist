@@ -1,7 +1,7 @@
 import React from 'react';
 
 const InputPriority = (props) => {
-    return <input type='checkbox' onClick={props.handleChange} className='inputPriority'></input>
+    return <button onClick={props.handleChange} style={props.style} className='inputPriority'></button>
 }
 
 export default InputPriority;
