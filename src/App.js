@@ -6,14 +6,18 @@ import Input from './Input/Input';
 const App = () => {
   const [items, setItems] = useState([]);
 
+  console.log(items)
+
   let favorites = [];
 
   const addItem = (val, prior, color) => {
-    setItems([...items, {
+    console.log(`[App.js]AddItem ${val} ${prior} ${color}`)
+    let helper = {
       value: val,
       priority: prior,
       color: color
-    }])
+    }
+    setItems(items.concat([helper]))
   }
 
   const handlePriorityChange = (i) => {
@@ -54,9 +58,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <h1>TO DO APP</h1>
       <Input handleClick={addItem} />
-      <hr></hr>
       {favorites}
       {itemsToRender}
     </div>

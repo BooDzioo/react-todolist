@@ -4,6 +4,8 @@ import Title from './Items/Title';
 import Priority from './Items/Priority';
 import Delete from './Items/Delete';
 
+import style from '../index.css';
+
 const TaskItem = (props) => {
 
     const style = {
@@ -11,7 +13,7 @@ const TaskItem = (props) => {
     }
 
     return (
-        <div className='taskItem' style={style}>
+        <div className={style.taskItem} style={style}>
             <Priority handlePriorityChange={props.handlePriority}/>
             <Title title={props.title}/>
             <Delete handleDeleteClick={props.handleDeleteClick}/>
