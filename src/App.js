@@ -5,25 +5,42 @@ import Input from './Input/Input';
 
 const App = () => {
   const [items, setItems] = useState([]);
+  const [editItem, setEditItem] = useState(null);
 
   console.log(items)
 
   let favorites = [];
 
-  const addItem = (val, prior, color) => {
-    console.log(`[App.js]AddItem ${val} ${prior} ${color}`)
-    let helper = {
-      value: val,
-      priority: prior,
-      color: color
+  const addItem = (val, prior, i) => {
+    if(typeof i === 'number') {
+      let helper = [...items];
+      helper[editItem.index] = {
+        value: val,
+        priority: prior
+      };
+      setItems(helper);
+      setEditItem(null);
+      console.log('o chuj')
+    } else {
+      let helper = {
+        value: val,
+        priority: prior
+      }
+      setItems(items.concat([helper]))
     }
-    setItems(items.concat([helper]))
   }
 
   const handlePriorityChange = (i) => {
     let itemsHelper = [...items];
     itemsHelper[i].priority = !itemsHelper[i].priority;
     setItems(itemsHelper);
+  }
+
+  const handleEdit = (i) => {
+    setEditItem({
+      ...items[i],
+      index: i
+    })
   }
 
   const deleteItem = (i) => {
@@ -38,18 +55,21 @@ const App = () => {
      
      return <TaskItem
       key = {index}
-      color = {item.color} 
       title={item.value}
+      priority={item.priority}
       handleDeleteClick={() => deleteItem(index)}
-      handlePriority={() => handlePriorityChange(index)}/>
+      handlePriority={() => handlePriorityChange(index)}
+      handleEditClick={() => handleEdit(index)}/>
     } else {
 
       favorites = [<TaskItem
         key = {index}
-        color = {item.color}  
         title={item.value}
+        priority={item.priority}
         handleDeleteClick={() => deleteItem(index)}
-        handlePriority={() => handlePriorityChange(index)}/>, ...favorites];
+        handlePriority={() => handlePriorityChange(index)}
+        handleEditClick={() => handleEdit(index)}/>, ...favorites];
+
 
       return null;
     }
@@ -58,9 +78,11 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Input handleClick={addItem} />
-      {favorites}
-      {itemsToRender}
+      <Input handleClick={addItem} handleEdit={editItem}/>
+      <div className="items">
+        {favorites}
+        {itemsToRender}
+      </div>
     </div>
   );
   

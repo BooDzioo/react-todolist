@@ -3,20 +3,20 @@ import React from 'react';
 import Title from './Items/Title';
 import Priority from './Items/Priority';
 import Delete from './Items/Delete';
+import Edit from './Items/Edit';
 
-import style from '../index.css';
+import styles from './taskItem.module.css';
+
+
 
 const TaskItem = (props) => {
-
-    const style = {
-        backgroundColor: props.color
-    }
-
     return (
-        <div className={style.taskItem} style={style}>
-            <Priority handlePriorityChange={props.handlePriority}/>
+        <div className={`${styles.container}`}>
+            <Priority handlePriorityChange={props.handlePriority}
+                priority={props.priority}/>
             <Title title={props.title}/>
             <Delete handleDeleteClick={props.handleDeleteClick}/>
+            <Edit handleClick={props.handleEditClick}/>
         </div>
     );
 }

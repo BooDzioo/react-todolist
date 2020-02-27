@@ -1,0 +1,15 @@
+.button {
+    background-color: rgb(8, 153, 27);
+    color: white;
+    margin: 0;
+    padding: 5px;
+    border: 1px solid rgb(5, 100, 18);
+    width: 90px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.button:hover {
+
+}

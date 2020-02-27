@@ -1,0 +1,80 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0px 1px 3px rgb(189, 187, 187);
+}
+
+.priority,
+.priority__true,
+.title,
+.delete,
+.edit {
+    display: inline-block;
+    text-align: center;
+    height: 30px;
+    position: relative;
+    top: 25px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.priority,
+.priority__true {
+    float: left;
+    width: 40px;
+    font-size: 18px;
+    background-color: inherit;
+    border: 1px solid #079459;
+    color: #079459;
+}
+
+.priority:hover {
+    background-color: #079459;
+    color: white;
+}
+
+.priority__true {  
+    background-color: #079459;
+    color: white;
+}
+
+.priority__true:hover {
+    background-color: inherit;
+    color: #079459;
+}
+
+.title {
+    font-size: 32px;
+    text-align: left;
+    color: #575757;
+    width: 300px;
+}
+
+.edit {
+    width: 40px;
+    background-color: inherit;
+    border: 1px solid #079459;
+    color: #079459;
+    float: right;
+}
+
+.edit:hover {
+    background-color: #079459;
+    color: white;
+}
+
+.delete {
+    width: 21px;
+    background-color: inherit;
+    border: 1px solid #505050;
+    color: #505050;
+    float: right;
+}
+
+.delete:hover {
+    background-color: #535555;
+    color: white;
+}

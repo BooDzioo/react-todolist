@@ -1,17 +1,10 @@
 import React from 'react';
 
+import styles from '../taskItem.module.css';
+
+
 const Title = (props) => {
-    let style = {
-        textDecoration: "line-through"
-    }
-    // let style = null;
-    // const changeStyle = () => {
-    //     style = {
-    //         textDecoration: "line-through"
-    //     }
-    //     console.log('siema')
-    // }
-    return <p className='title'  style={style}>{props.title}</p>
+    return <p className={`${styles.title}`}>{props.title}</p>
 }
 
 export default Title;

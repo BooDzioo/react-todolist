@@ -8,7 +8,7 @@ const Description = (props) => {
         toggleFocus.current.focus();
     })
     
-    return <input ref={toggleFocus} type='text' value={props.currentDescription} onChange={props.handleChange} className='descriptionInput'></input>
+    return <input ref={toggleFocus} type='text' value={props.currentDescription} onChange={props.handleChange} placeholder="Add task..." className='descriptionInput'></input>
 }
 
 export default Description;

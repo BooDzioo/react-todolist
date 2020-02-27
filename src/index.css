@@ -10,6 +10,8 @@ html {
 }
 
 body {
+  background: rgb(58,180,168);
+  background: linear-gradient(90deg, rgba(58,180,168,1) 0%, rgba(97,253,29,1) 50%, rgba(199,252,69,1) 100%);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -17,6 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100%;
+  text-align: center;
 }
 
 code {
@@ -30,15 +33,27 @@ code {
 }
 
 .App {
+  position: relative;
+  top: 100px;
+  display: inline-block;
   text-align: center;
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 700px;
+  background-color: white;
+  box-shadow: 4px 4px 30px black ;
+  overflow: scroll;
 }
 
 .main-input-container {
-  width: 100%;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0px 3px 10px gray;
+  width: inherit;
   height: 96px;
-  border-bottom: 1px solid black;
+  padding-top: 24px;
+  padding-right: 10px;
+  text-align: center;
+  z-index: 1;
 }
 
 .main-input-container input,
@@ -46,6 +61,10 @@ code {
   vertical-align: middle;
   margin: 10px 5px;
   height: 30px;
+}
+
+.main-input-container input {
+  width: 60%;
 }
 
 .inputPriority {
@@ -57,7 +76,6 @@ code {
 .taskItem {
   height: 10%;
   padding: 10px;
-  border-bottom: 1px solid black;
 }
 
 .taskItem > * {
@@ -67,16 +85,14 @@ code {
   margin: 0 5px;
 }
 
-.priority {
-  
+.items {
+  position: relative;
+  top: 96px;
 }
 
-
-.del {
-
-}
-
-.title {
+button,
+li {
+  border-radius: 3px;
 
 }
 
