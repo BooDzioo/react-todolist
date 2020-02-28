@@ -13,3 +13,27 @@
 .button:hover {
 
 }
+
+.priority,
+.priority__true {
+    text-align: center;
+    width: 40px;
+    padding: 3px;
+    margin: 10px 5px;
+    height: 30px;
+    font-size: 18px;
+    background-color: inherit;
+    border: 1px solid #079459;
+    color: #079459;
+    cursor: pointer;
+}
+
+.priority:hover {
+    background-color: #079459;
+    color: white;
+}
+
+.priority__true {  
+    background-color: #079459;
+    color: white;
+}

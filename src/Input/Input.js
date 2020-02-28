@@ -3,7 +3,8 @@ import React, {useState, useEffect, useRef} from 'react';
 import Description from './Properties/Description';
 import InputPriority from './Properties/InputPriority';
 
-import styles from './input.module.css'
+import styles from './input.module.css';
+import styles2 from '../TaskItems/taskItem.module.css';
 
 const Input = (props) => {
 
@@ -20,12 +21,10 @@ const Input = (props) => {
     }, [])
 
     useEffect(() => {
-        if(props.handleEdit !== null) {
-            setCurrentValue(props.handleEdit.value);
-            setCurrentPriority(props.handleEdit.priority);
-            setIndex(props.handleEdit.index);
-        }
-    }, [props])
+        setCurrentValue(props.handleEdit.value);
+        setCurrentPriority(props.handleEdit.priority);
+        setIndex(props.handleEdit.index);
+    }, [props.handleEdit])
 
     const handleValueChange = (e) => {
         setCurrentValue(e.target.value);
@@ -36,7 +35,6 @@ const Input = (props) => {
     }
 
     const handleClick = () => {
-        console.log(index)
         props.handleClick(currentValue, currentPriority, index);
         setCurrentValue('');
         setCurrentPriority(false);
@@ -49,14 +47,11 @@ const Input = (props) => {
         }
     }
 
-    const style = {
-        backgroundColor: currentPriority ? 'red' : 'green',
-        border: `2px solid ${currentPriority ? 'red' : 'green'}`
-    }
+    const style = currentPriority ? `${styles.priority__true}` : `${styles.priority}`;
 
     return (
         <div className='main-input-container'>
-            <InputPriority handleChange={handlePriorityChange} style={style}/>
+            <InputPriority handleChange={handlePriorityChange} module={style}/>
             <Description handleChange={handleValueChange} currentDescription={currentValue}/>
             <button ref={buttonRef} onClick={handleClick} className={`${styles.button}`}>ADD</button>
         </div>

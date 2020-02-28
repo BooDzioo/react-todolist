@@ -5,9 +5,7 @@ import Input from './Input/Input';
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [editItem, setEditItem] = useState(null);
-
-  console.log(items)
+  const [editItem, setEditItem] = useState({});
 
   let favorites = [];
 
@@ -19,8 +17,7 @@ const App = () => {
         priority: prior
       };
       setItems(helper);
-      setEditItem(null);
-      console.log('o chuj')
+      setEditItem({});
     } else {
       let helper = {
         value: val,
@@ -51,6 +48,11 @@ const App = () => {
 
   const itemsToRender = items.map((item, index) => {
     
+    let edit = '';
+     if (editItem.hasOwnProperty('index')) {
+       edit = editItem.index === index ? index : '';
+     }
+
     if (item.priority === false) {
      
      return <TaskItem
@@ -59,7 +61,8 @@ const App = () => {
       priority={item.priority}
       handleDeleteClick={() => deleteItem(index)}
       handlePriority={() => handlePriorityChange(index)}
-      handleEditClick={() => handleEdit(index)}/>
+      handleEditClick={() => handleEdit(index)}
+      edit={edit}/>
     } else {
 
       favorites = [<TaskItem
@@ -68,7 +71,8 @@ const App = () => {
         priority={item.priority}
         handleDeleteClick={() => deleteItem(index)}
         handlePriority={() => handlePriorityChange(index)}
-        handleEditClick={() => handleEdit(index)}/>, ...favorites];
+        handleEditClick={() => handleEdit(index)}
+        edit={edit}/>, ...favorites];
 
 
       return null;

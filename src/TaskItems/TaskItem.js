@@ -16,7 +16,8 @@ const TaskItem = (props) => {
                 priority={props.priority}/>
             <Title title={props.title}/>
             <Delete handleDeleteClick={props.handleDeleteClick}/>
-            <Edit handleClick={props.handleEditClick}/>
+            <Edit handleClick={props.handleEditClick}
+                edit={props.edit}/>
         </div>
     );
 }
