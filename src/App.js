@@ -1,56 +1,60 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
 
-import TaskItem from './TaskItems/TaskItem';
-import Input from './Input/Input';
+import * as actionTypes from './reducers/actions';
 
-const App = () => {
-  const [items, setItems] = useState([]);
-  const [editItem, setEditItem] = useState({});
+import TaskItem from './components/TaskItems/TaskItem';
+import Input from './components/Input/Input';
+
+const App = (props) => {
+  // const [items, setItems] = useState([]);
+  // const [editItem, setEditItem] = useState({});
 
   let favorites = [];
 
-  const addItem = (val, prior, i) => {
-    if(typeof i === 'number') {
-      let helper = [...items];
-      helper[editItem.index] = {
-        value: val,
-        priority: prior
-      };
-      setItems(helper);
-      setEditItem({});
-    } else {
-      let helper = {
-        value: val,
-        priority: prior
-      }
-      setItems(items.concat([helper]))
-    }
-  }
+  // const addItem = (val, prior, i) => {
+  //   if(typeof i === 'number') {
+  //     let helper = [...items];
+  //     helper[editItem.index] = {
+  //       value: val,
+  //       priority: prior
+  //     };
+  //     setItems(helper);
+  //     setEditItem({});
+  //   } else {
+  //     let helper = {
+  //       value: val,
+  //       priority: prior
+  //     }
+  //     setItems(items.concat([helper]))
+  //   }
+  // }
 
-  const handlePriorityChange = (i) => {
-    let itemsHelper = [...items];
-    itemsHelper[i].priority = !itemsHelper[i].priority;
-    setItems(itemsHelper);
-  }
+  // const handlePriorityChange = (i) => {
+  //   let itemsHelper = [...items];
+  //   itemsHelper[i].priority = !itemsHelper[i].priority;
+  //   setItems(itemsHelper);
+  // }
 
-  const handleEdit = (i) => {
-    setEditItem({
-      ...items[i],
-      index: i
-    })
-  }
+  // const handleEdit = (i) => {
+  //   setEditItem({
+  //     ...items[i],
+  //     index: i
+  //   })
+  // }
 
-  const deleteItem = (i) => {
-    const itemsHelper = [...items];
-    itemsHelper.splice(i, 1);
-    setItems(itemsHelper);
-  }
+  // const deleteItem = (i) => {
+  //   const itemsHelper = [...items];
+  //   itemsHelper.splice(i, 1);
+  //   setItems(itemsHelper);
+  // }
 
-  const itemsToRender = items.map((item, index) => {
+  const itemsToRender = props.items.map((item, index) => {
     
+    //cheking if item is in edition (for styling)
     let edit = '';
-     if (editItem.hasOwnProperty('index')) {
-       edit = editItem.index === index ? index : '';
+     if (props.edit.hasOwnProperty('index')) {
+       edit = props.edit.index === index ? index : '';
      }
 
     if (item.priority === false) {
@@ -59,9 +63,9 @@ const App = () => {
       key = {index}
       title={item.value}
       priority={item.priority}
-      handleDeleteClick={() => deleteItem(index)}
-      handlePriority={() => handlePriorityChange(index)}
-      handleEditClick={() => handleEdit(index)}
+      handleDeleteClick={() => props.deleteItem(index)}
+      handlePriority={() => props.changeItemPriority(index)}
+      handleEditClick={() => props.editItem(index)}
       edit={edit}/>
     } else {
 
@@ -69,9 +73,9 @@ const App = () => {
         key = {index}
         title={item.value}
         priority={item.priority}
-        handleDeleteClick={() => deleteItem(index)}
-        handlePriority={() => handlePriorityChange(index)}
-        handleEditClick={() => handleEdit(index)}
+        handleDeleteClick={() => props.deleteItem(index)}
+        handlePriority={() => props.changeItemPriority(index)}
+        handleEditClick={() => props.editItem(index)}
         edit={edit}/>, ...favorites];
 
 
@@ -82,7 +86,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Input handleClick={addItem} handleEdit={editItem}/>
+      <Input/>
       <div className="items">
         {favorites}
         {itemsToRender}
@@ -92,4 +96,19 @@ const App = () => {
   
 }
 
-export default App;
+const stateToProps = state => {
+  return {
+      items: state.items,
+      edit: state.editItem
+  }
+}
+
+const actionsToProps = dispatch => {
+  return {
+      editItem:(index) => dispatch({type: actionTypes.EDIT_ITEM, index: index}),
+      deleteItem:(index) => dispatch({type: actionTypes.DELETE_ITEM, index: index}),
+      changeItemPriority:(index) => dispatch({type: actionTypes.CHANGE_ITEM_PRIORITY, index: index})
+  }
+}
+
+export default connect(stateToProps, actionsToProps)(App);

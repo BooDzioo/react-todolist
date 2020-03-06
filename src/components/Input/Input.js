@@ -1,10 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+
+import * as actionTypes from '../../reducers/actions'
 
 import Description from './Properties/Description';
 import InputPriority from './Properties/InputPriority';
 
 import styles from './input.module.css';
-import styles2 from '../TaskItems/taskItem.module.css';
 
 const Input = (props) => {
 
@@ -21,10 +23,12 @@ const Input = (props) => {
     }, [])
 
     useEffect(() => {
-        setCurrentValue(props.handleEdit.value);
-        setCurrentPriority(props.handleEdit.priority);
-        setIndex(props.handleEdit.index);
-    }, [props.handleEdit])
+        if ( Object.keys(props.edit.item).lenght !== 0) {
+            setCurrentValue(props.edit.item.value);
+            setCurrentPriority(props.edit.item.priority);
+            setIndex(props.edit.index);
+        }
+    }, [props.edit])
 
     const handleValueChange = (e) => {
         setCurrentValue(e.target.value);
@@ -35,7 +39,7 @@ const Input = (props) => {
     }
 
     const handleClick = () => {
-        props.handleClick(currentValue, currentPriority, index);
+        props.addItem(currentValue, currentPriority, index);
         setCurrentValue('');
         setCurrentPriority(false);
         setIndex(null);
@@ -57,5 +61,17 @@ const Input = (props) => {
         </div>
     );
 }
+const stateToProps = state => {
+    return {
+        edit: state.editItem
+    }
+}
 
-export default Input;
+const actionsToProps = dispatch => {
+    return {
+        addItem:(value, priority, index = null) => dispatch({type: actionTypes.ADD_ITEM, value: value, priority: priority, index: index})
+    }
+}
+
+
+export default connect(stateToProps, actionsToProps)(Input);
